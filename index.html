@@ -49,19 +49,20 @@
       cursor: not-allowed;
     }
     .subject:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      left: 105%;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #333;
-      color: #fff;
-      padding: 6px;
-      border-radius: 4px;
-      white-space: nowrap;
-      font-size: 12px;
-      display: block;
-    }
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -30px; /* cambia la posición vertical */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 12px;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
   </style>
 </head>
 <body>
@@ -197,7 +198,7 @@
               div.classList.add("completed");
             } else if (depends.length && !depends.every(isCompleted)) {
               div.classList.add("locked");
-              div.setAttribute("data-tooltip", "Requiere: " + depends.filter(d => !isCompleted(d)).join(", "));
+              div.setAttribute("data-tooltip", "Requisito: " + depends.filter(d => !isCompleted(d)).join(", "));
             }
 
             div.addEventListener("click", () => {
