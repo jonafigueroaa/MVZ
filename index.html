@@ -1,76 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Licenciatura en Medicina Veterinaria y Zootecnia</title>
-  <title>Pensum MVZ 2023</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Malla Curricular MVZ</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f4f7f9;
+      background: #f7f9fc;
       color: #333;
-      padding: 20px;
+      margin: 0;
+      padding: 1rem;
     }
     h2 {
-      margin-top: 30px;
-      font-size: 18px;
+      margin-top: 2rem;
+      font-size: 1.5rem;
     }
-    h3 {
-      font-size: 16px;
-    }
-    .grid {
-      display: flex;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 15px;
-      flex-wrap: wrap;
+    .year {
+      margin-bottom: 2rem;
     }
     .cycle {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      padding: 10px;
-      flex: 1;
-      min-width: 220px;
-      font-size: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
     }
     .subject {
-      margin: 4px 0;
-      padding: 8px;
-      border-radius: 6px;
-      background: #e0e7ef;
+      padding: 8px 12px;
+      margin: 6px;
+      border-radius: 8px;
+      background-color: #e3eaf2;
       cursor: pointer;
       position: relative;
-      transition: background 0.3s;
+      transition: 0.2s;
+      font-size: 14px;
     }
     .subject.completed {
-      background: #a5d6a7;
+      background-color: #b6e3b6;
       text-decoration: line-through;
     }
     .subject.locked {
-      background: #ddd;
+      background-color: #ddd;
       cursor: not-allowed;
     }
     .subject:hover::after {
       content: attr(data-tooltip);
       position: absolute;
-      left: 105%;
-      top: 50%;
-      transform: translateY(-50%);
+      bottom: -1.5rem;
+      left: 0;
       background: #333;
       color: #fff;
-      padding: 6px;
+      padding: 2px 6px;
       border-radius: 4px;
-      white-space: nowrap;
       font-size: 12px;
-      display: block;
+      white-space: nowrap;
     }
   </style>
 </head>
 <body>
-  <h1>Licenciatura en Medicina Veterinaria y Zootecnia</h1>
-  <div class="grid" id="malla"></div>
-
+  <h1>Malla Curricular - Medicina Veterinaria y Zootecnia</h1>
+  <div id="malla"></div>
   <script>
     const data = {
       "Primer Año": {
@@ -83,78 +71,77 @@
         ],
         "Ciclo II": [
           { name: "Animales y Su Ambiente" },
-          { name: "Bioestadistica", dependsOn: ["Matematica"] },
-          { name: "Biofisica", dependsOn: ["Matematica"] },
-          { name: "Biologia Molecular de la Celula", dependsOn: ["Quimica General"] },
-          { name: "Quimica Organica", dependsOn: ["Quimica General"] },
-          { name: "Quimica Organica", dependsOn: ["Quimica General"] }
+          { name: "Bioestadistica", depends: ["Matematica"] },
+          { name: "Biofisica", depends: ["Matematica"] },
+          { name: "Biologia Molecular de la Celula", depends: ["Quimica General"] },
+          { name: "Quimica Organica", depends: ["Quimica General"] }
         ]
       },
       "Segundo Año": {
         "Ciclo III": [
-          { name: "Anatomia Descriptiva y Diseccion I", dependsOn: ["Biologia Molecular de la Celula"] },
-          { name: "Bioquimica", dependsOn: ["Quimica Organica"] },
+          { name: "Anatomia Descriptiva y Diseccion I", depends: ["Biologia Molecular de la Celula"] },
+          { name: "Bioquimica", depends: ["Quimica Organica"] },
           "Ingles I",
           "Metodos de Investigacion e Informatica",
-          { name: "Microbiologia General", dependsOn: ["Biologia Molecular de la Celula"] }
+          { name: "Microbiologia General", depends: ["Biologia Molecular de la Celula"] }
         ],
         "Ciclo IV": [
-          { name: "Anatomia Descriptiva y Diseccion II", dependsOn: ["Anatomia Descriptiva y Diseccion I"] },
-          { name: "Bacteriologia y Micologia", dependsOn: ["Microbiologia General"] },
-          { name: "Ingles II", dependsOn: ["Ingles I"] },
-          { name: "Parasitologia", dependsOn: ["Microbiologia General"] },
-          { name: "Pastos y Forrajes", dependsOn: ["Animales y Su Ambiente"] }
+          { name: "Anatomia Descriptiva y Diseccion II", depends: ["Anatomia Descriptiva y Diseccion I"] },
+          { name: "Bacteriologia y Micologia", depends: ["Microbiologia General"] },
+          { name: "Ingles II", depends: ["Ingles I"] },
+          { name: "Parasitologia", depends: ["Microbiologia General"] },
+          { name: "Pastos y Forrajes", depends: ["Animales y Su Ambiente"] }
         ]
       },
       "Tercer Año": {
         "Ciclo V": [
-          { name: "Anatomia Topografica", dependsOn: ["Anatomia Descriptiva y Diseccion II"] },
-          { name: "Enfermedades Parasitarias", dependsOn: ["Parasitologia"] },
-          { name: "Fisiologia General", dependsOn: ["Bioquimica"] },
-          { name: "Histologia y Embriologia Comparada", dependsOn: ["Anatomia Descriptiva y Diseccion II"] },
-          { name: "Ingles III", dependsOn: ["Ingles II"] },
-          { name: "Virologia", dependsOn: ["Microbiologia General"] }
+          { name: "Anatomia Topografica", depends: ["Anatomia Descriptiva y Diseccion II"] },
+          { name: "Enfermedades Parasitarias", depends: ["Parasitologia"] },
+          { name: "Fisiologia General", depends: ["Bioquimica"] },
+          { name: "Histologia y Embriologia Comparada", depends: ["Anatomia Descriptiva y Diseccion II"] },
+          { name: "Ingles III", depends: ["Ingles II"] },
+          { name: "Virologia", depends: ["Microbiologia General"] }
         ],
         "Ciclo VI": [
-          { name: "Fisiologia Especial", dependsOn: ["Fisiologia General"] },
-          { name: "Ingles IV", dependsOn: ["Ingles III"] },
-          { name: "Inmunologia", dependsOn: ["Virologia"] },
-          { name: "Higiene y Profilaxis Animal", dependsOn: ["Bacteriologia y Micologia", "Virologia"] },
-          { name: "Propedeutica Tecnica", dependsOn: ["Fisiologia General"] },
-          { name: "Zootecnia de Pequeñas Especies", dependsOn: ["Zootecnia General", "Anatomia Topografica"] }
+          { name: "Fisiologia Especial", depends: ["Fisiologia General"] },
+          { name: "Ingles IV", depends: ["Ingles III"] },
+          { name: "Inmunologia", depends: ["Virologia"] },
+          { name: "Higiene y Profilaxis Animal", depends: ["Bacteriologia y Micologia", "Virologia"] },
+          { name: "Propedeutica Tecnica", depends: ["Fisiologia General"] },
+          { name: "Zootecnia de Pequeñas Especies", depends: ["Zootecnia General", "Anatomia Topografica"] }
         ]
       },
       "Cuarto Año": {
         "Ciclo VII": [
-          { name: "Alimentos y Nutricion", dependsOn: ["Fisiologia Especial"] },
-          { name: "Farmacologia General", dependsOn: ["Fisiologia Especial", "Propedeutica Tecnica"] },
-          { name: "Imagenologia", dependsOn: ["Anatomia Topografica"] },
-          { name: "Produccion de pequeños rumiantes", dependsOn: ["Higiene y Profilaxis Animal"] },
-          { name: "ECONOMÍA Y  ADMINISTRACIÓN DE EMPRESAS AGROPECUARIAS", dependsOn: ["Higiene y Profilaxis Animal"] },
-          { name: "Patologia General", dependsOn: ["Fisiologia Especial"] }
+          { name: "Alimentos y Nutricion", depends: ["Fisiologia Especial"] },
+          { name: "Farmacologia General", depends: ["Fisiologia Especial", "Propedeutica Tecnica"] },
+          { name: "Imagenologia", depends: ["Anatomia Topografica"] },
+          { name: "Produccion de pequeños rumiantes", depends: ["Higiene y Profilaxis Animal"] },
+          { name: "ECONOMÍA Y  ADMINISTRACIÓN DE EMPRESAS AGROPECUARIAS", depends: ["Higiene y Profilaxis Animal"] },
+          { name: "Patologia General", depends: ["Fisiologia Especial"] }
         ],
         "Ciclo VIII": [
-          { name: "Tecnicas Quirurgicas", dependsOn: ["Imagenologia", "Farmacologia General"] },
-          { name: "Laboratorio Clinico", dependsOn: ["Enfermedades Parasitarias", "Fisiologia Especial"] },
-          { name: "Farmacologia Especial", dependsOn: ["Farmacologia General"] },
-          { name: "Patologia Sistemica I", dependsOn: ["Patologia General"] },
-          { name: "Seminario de Investigacion", dependsOn: ["Metodos de Investigacion e Informatica"] }
+          { name: "Tecnicas Quirurgicas", depends: ["Imagenologia", "Farmacologia General"] },
+          { name: "Laboratorio Clinico", depends: ["Enfermedades Parasitarias", "Fisiologia Especial"] },
+          { name: "Farmacologia Especial", depends: ["Farmacologia General"] },
+          { name: "Patologia Sistemica I", depends: ["Patologia General"] },
+          { name: "Seminario de Investigacion", depends: ["Metodos de Investigacion e Informatica"] }
         ]
       },
       "Quinto Año": {
         "Ciclo IX": [
-          { name: "Cirugia General", dependsOn: ["Tecnicas Quirurgicas"] },
-          { name: "Epidemiologia", dependsOn: ["Bioestadistica", "Higiene y Profilaxis Animal"] },
-          { name: "Medicina y Manejo de Fauna Silvestre", dependsOn: ["Animales y Su Ambiente", "Farmacologia Especial"] },
-          { name: "Patologia Sistemica II", dependsOn: ["Patologia Sistemica I"] },
-          { name: "Produccion Acuicola y Cunicula", dependsOn: ["ECONOMÍA Y  ADMINISTRACIÓN DE EMPRESAS AGROPECUARIAS"] }
+          { name: "Cirugia General", depends: ["Tecnicas Quirurgicas"] },
+          { name: "Epidemiologia", depends: ["Bioestadistica", "Higiene y Profilaxis Animal"] },
+          { name: "Medicina y Manejo de Fauna Silvestre", depends: ["Animales y Su Ambiente", "Farmacologia Especial"] },
+          { name: "Patologia Sistemica II", depends: ["Patologia Sistemica I"] },
+          { name: "Produccion Acuicola y Cunicula", depends: ["ECONOMÍA Y  ADMINISTRACIÓN DE EMPRESAS AGROPECUARIAS"] }
         ],
         "Ciclo X": [
-          { name: "Salud Publica Veterinaria", dependsOn: ["Epidemiologia"] },
-          { name: "Inspeccion de Productos de Origen Animal", dependsOn: ["Higiene y Profilaxis Animal", "Patologia Sistemica II"] },
-          { name: "Clinica y Produccion de Bovinos", dependsOn: ["Farmacologia Especial", "Patologia Sistemica II"] },
-          { name: "Clinica de Equinos", dependsOn: ["Farmacologia Especial", "Patologia Sistemica II"] },
-          { name: "Enfermedades Infecciosas", dependsOn: ["Patologia Sistemica II"] }
+          { name: "Salud Publica Veterinaria", depends: ["Epidemiologia"] },
+          { name: "Inspeccion de Productos de Origen Animal", depends: ["Higiene y Profilaxis Animal", "Patologia Sistemica II"] },
+          { name: "Clinica y Produccion de Bovinos", depends: ["Farmacologia Especial", "Patologia Sistemica II"] },
+          { name: "Clinica de Equinos", depends: ["Farmacologia Especial", "Patologia Sistemica II"] },
+          { name: "Enfermedades Infecciosas", depends: ["Patologia Sistemica II"] }
         ]
       },
       "Sexto Año": {
@@ -164,73 +151,76 @@
           { name: "Fisiopatologia de la Reproduccion", depends: ["Clinica y Produccion de Bovinos"] },
           { name: "Legislacion y Etica Profesional", depends: ["Salud Publica Veterinaria", "Inspeccion de Productos de Origen Animal", "Clinica y Produccion de Bovinos", "Clinica de Equinos", "Enfermedades Infecciosas"] },
           { name: "Clinica y Produccion de Aves", depends: ["Farmacologia Especial", "Enfermedades Infecciosas"] }
-          { name: "Clinica y Produccion de Cerdos", dependsOn: ["Farmacologia Especial", "Enfermedades Infecciosas"] },
-          { name: "Clinica de Pequeñas Especies", dependsOn: ["Farmacologia Especial", "Enfermedades Infecciosas"] },
-          { name: "Fisiopatologia de la Reproduccion", dependsOn: ["Clinica y Produccion de Bovinos"] },
-          { name: "Legislacion y Etica Profesional", dependsOn: ["Salud Publica Veterinaria", "Inspeccion de Productos de Origen Animal", "Clinica y Produccion de Bovinos", "Clinica de Equinos", "Enfermedades Infecciosas"] },
-          { name: "Clinica y Produccion de Aves", dependsOn: ["Farmacologia Especial", "Enfermedades Infecciosas"] }
         ]
       }
     };
 
-    const container = document.getElementById("malla");
-    let completed = JSON.parse(localStorage.getItem("completedSubjects") || "[]");
+    const container = document.getElementById('malla');
+    const state = JSON.parse(localStorage.getItem('malla-vet-state') || '{}');
 
-    function isCompleted(name) {
-      return completed.includes(name);
+    function saveState() {
+      localStorage.setItem('malla-vet-state', JSON.stringify(state));
     }
 
-    function render() {
-      container.innerHTML = "";
-      for (const year in data) {
-        const yearDiv = document.createElement("div");
-        yearDiv.className = "cycle";
-        const h2 = document.createElement("h2");
-        h2.textContent = year;
-        yearDiv.appendChild(h2);
+    function createSubject(subject, allSubjects) {
+      const name = typeof subject === 'string' ? subject : subject.name;
+      const depends = typeof subject === 'string' ? [] : subject.depends || [];
+      const div = document.createElement('div');
+      div.className = 'subject';
+      div.textContent = name;
+      if (state[name]) div.classList.add('completed');
+      allSubjects[name] = { el: div, depends };
 
-        for (const cycle in data[year]) {
-          const cycleDiv = document.createElement("div");
-          const h3 = document.createElement("h3");
-          h3.textContent = cycle;
-          cycleDiv.appendChild(h3);
+      div.addEventListener('click', () => {
+        if (div.classList.contains('locked')) return;
+        div.classList.toggle('completed');
+        state[name] = div.classList.contains('completed');
+        saveState();
+        updateSubjects();
+      });
+      return div;
+    }
 
-          data[year][cycle].forEach(subject => {
-            const name = typeof subject === 'string' ? subject : subject.name;
-            const depends = subject.dependsOn || [];
-            const div = document.createElement("div");
-            div.className = "subject";
-            div.textContent = name;
-
-            if (isCompleted(name)) {
-              div.classList.add("completed");
-            } else if (depends.length && !depends.every(isCompleted)) {
-              div.classList.add("locked");
-              div.setAttribute("data-tooltip", "Requiere: " + depends.filter(d => !isCompleted(d)).join(", "));
-            }
-
-            div.addEventListener("click", () => {
-              if (div.classList.contains("locked")) return;
-              if (div.classList.contains("completed")) {
-                completed = completed.filter(s => s !== name);
-              } else {
-                completed.push(name);
-              }
-              localStorage.setItem("completedSubjects", JSON.stringify(completed));
-              render();
-            });
-
-            cycleDiv.appendChild(div);
-          });
-
-          yearDiv.appendChild(cycleDiv);
+    function updateSubjects() {
+      for (const key in allSubjects) {
+        const subject = allSubjects[key];
+        const unmet = subject.depends.filter(d => !state[d]);
+        subject.el.classList.remove('locked');
+        subject.el.removeAttribute('data-tooltip');
+        if (unmet.length > 0) {
+          subject.el.classList.add('locked');
+          subject.el.setAttribute('data-tooltip', 'Requiere: ' + unmet.join(', '));
         }
-
-        container.appendChild(yearDiv);
       }
     }
 
-    render();
+    const allSubjects = {};
+
+    for (const year in data) {
+      const yearDiv = document.createElement('div');
+      yearDiv.className = 'year';
+      const yearTitle = document.createElement('h2');
+      yearTitle.textContent = year;
+      yearDiv.appendChild(yearTitle);
+
+      const cycles = data[year];
+      for (const cycle in cycles) {
+        const cycleDiv = document.createElement('div');
+        cycleDiv.className = 'cycle';
+        cycles[cycle].forEach(subject => {
+          const subjectDiv = createSubject(subject, allSubjects);
+          cycleDiv.appendChild(subjectDiv);
+        });
+        const cycleTitle = document.createElement('h3');
+        cycleTitle.textContent = cycle;
+        yearDiv.appendChild(cycleTitle);
+        yearDiv.appendChild(cycleDiv);
+      }
+
+      container.appendChild(yearDiv);
+    }
+
+    updateSubjects();
   </script>
 </body>
 </html>
