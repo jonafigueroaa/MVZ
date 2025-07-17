@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Licenciatura en MVZ 2023</title>
+  <title>MVZ Plan 2023</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -69,100 +69,100 @@
   <div class="grid" id="malla"></div>
 
   <script>
-    const data = {
-      "Primer Año": {
-        "Ciclo I": [
-          "Matematica",
-          "Filosofia General",
-          "Sociologia General",
-          "Quimica General",
-          "Zootecnia General"
-        ],
-        "Ciclo II": [
-          { name: "Animales y Su Ambiente" },
-          { name: "Bioestadistica", dependsOn: ["Matematica"] },
-          { name: "Biofisica", dependsOn: ["Matematica"] },
-          { name: "Biologia Molecular de la Celula", dependsOn: ["Quimica General"] },
-          { name: "Quimica Organica", dependsOn: ["Quimica General"] }
-        ]
-      },
-      "Segundo Año": {
-        "Ciclo III": [
-          { name: "Anatomia Descriptiva y Diseccion I", dependsOn: ["Biologia Molecular de la Celula"] },
-          { name: "Bioquimica", dependsOn: ["Quimica Organica"] },
-          "Ingles I",
-          "Metodos de Investigacion e Informatica",
-          { name: "Microbiologia General", dependsOn: ["Biologia Molecular de la Celula"] }
-        ],
-        "Ciclo IV": [
-          { name: "Anatomia Descriptiva y Diseccion II", dependsOn: ["Anatomia Descriptiva y Diseccion I"] },
-          { name: "Bacteriologia y Micologia", dependsOn: ["Microbiologia General"] },
-          { name: "Ingles II", dependsOn: ["Ingles I"] },
-          { name: "Parasitologia", dependsOn: ["Microbiologia General"] },
-          { name: "Pastos y Forrajes", dependsOn: ["Animales y Su Ambiente"] }
-        ]
-      },
-      "Tercer Año": {
-        "Ciclo V": [
-          { name: "Anatomia Topografica", dependsOn: ["Anatomia Descriptiva y Diseccion II"] },
-          { name: "Enfermedades Parasitarias", dependsOn: ["Parasitologia"] },
-          { name: "Fisiologia General", dependsOn: ["Bioquimica"] },
-          { name: "Histologia y Embriologia Comparada", dependsOn: ["Anatomia Descriptiva y Diseccion II"] },
-          { name: "Ingles III", dependsOn: ["Ingles II"] },
-          { name: "Virologia", dependsOn: ["Microbiologia General"] }
-        ],
-        "Ciclo VI": [
-          { name: "Fisiologia Especial", dependsOn: ["Fisiologia General"] },
-          { name: "Ingles IV", dependsOn: ["Ingles III"] },
-          { name: "Inmunologia", dependsOn: ["Virologia"] },
-          { name: "Higiene y Profilaxis Animal", dependsOn: ["Bacteriologia y Micologia", "Virologia"] },
-          { name: "Propedeutica Tecnica", dependsOn: ["Fisiologia General"] },
-          { name: "Zootecnia de Pequeñas Especies", dependsOn: ["Zootecnia General", "Anatomia Topografica"] }
-        ]
-      },
-      "Cuarto Año": {
-        "Ciclo VII": [
-          { name: "Alimentos y Nutricion", dependsOn: ["Fisiologia Especial"] },
-          { name: "Farmacologia General", dependsOn: ["Fisiologia Especial", "Propedeutica Tecnica"] },
-          { name: "Imagenologia", dependsOn: ["Anatomia Topografica"] },
-          { name: "Produccion de pequeños rumiantes", dependsOn: ["Higiene y Profilaxis Animal"] },
-          { name: "Economia y Administracion de Empresas Agropecuarias", dependsOn: ["Higiene y Profilaxis Animal"] },
-          { name: "Patologia General", dependsOn: ["Fisiologia Especial"] }
-        ],
-        "Ciclo VIII": [
-          { name: "Tecnicas Quirurgicas", dependsOn: ["Imagenologia", "Farmacologia General"] },
-          { name: "Laboratorio Clinico", dependsOn: ["Enfermedades Parasitarias", "Fisiologia Especial"] },
-          { name: "Farmacologia Especial", dependsOn: ["Farmacologia General"] },
-          { name: "Patologia Sistemica I", dependsOn: ["Patologia General"] },
-          { name: "Seminario de Investigacion", dependsOn: ["Metodos de Investigacion e Informatica"] }
-        ]
-      },
-      "Quinto Año": {
-        "Ciclo IX": [
-          { name: "Cirugia General", dependsOn: ["Tecnicas Quirurgicas"] },
-          { name: "Epidemiologia", dependsOn: ["Bioestadistica","Higiene y Profilaxis Animal"] },
-          { name: "Medicina y Manejo de Fauna Silvestre", dependsOn: ["Animales y Su Ambiente", "Farmacologia Especial"]},
-          { name: "Patologia Sistemica II", dependsOn: ["Patologia Sistemica I"]},
-          { name: "Produccion Acuicola y Cunicola", dependsOn: ["Economia y Administracion de Empresas Agropecuarias"]}
-       ],
-        "Ciclo X": [
-          { name: "Salud Publica Veterinaria", dependsOn: ["Epidemiologia"] },
-          { name: "Inspeccion de Productos de Origen Animal", dependsOn: ["Higiene y Profilaxis Animal", "Patologia Sistemica II"] },
-          { name: "Clinica y Produccion de Bovinos", dependsOn: ["Farmacologia Especial","Patologia Sistemica II"] },
-          { name: "Clinica de Equinos", dependsOn: ["Farmacologia Especial","Patologia Sistemica II"] },
-          { name: "Enfermedades Infecciosas", dependsOn: ["Patologia Sistemica II"] }
-        ]
-      },
-      "Sexto Año": {
-        "Ciclo XI": [
-          { name: "Clinica y Produccion de Cerdos", dependsOn: ["Farmacologia Especial","Enfermedades Infecciosas"] },
-          { name: "Clinica de Pequeñas Especies", dependsOn: ["Farmacologia Especial","Enfermedades Infecciosas"] },
-          { name: "Fisiopatologia de la Reproduccion", dependsOn: ["Clinica y Produccion de Bovinos"] },
-          { name: "Legislacion y Etica Profesional", dependsOn: ["Salud Publica Veterinaria","Inspeccion de Productos de Origen Animal","Clinica y Produccion de Bovinos","Clinica de Equinos","Enfermedades Infecciosas"] },
-          { name: "Clinica y Produccion de Aves", dependsOn: ["Farmacologia Especial","Enfermedades Infecciosas"] }
-        ]
-      }
-    };
+   const data = {
+  "Primer Año": {
+    "Ciclo I": [
+      "Matemática",
+      "Filosofía General",
+      "Sociología General",
+      "Química General",
+      "Zootecnia General"
+    ],
+    "Ciclo II": [
+      { name: "Animales y su Ambiente" },
+      { name: "Bioestadística", dependsOn: ["Matemática"] },
+      { name: "Biofísica", dependsOn: ["Matemática"] },
+      { name: "Biología Molecular de la Célula", dependsOn: ["Química General"] },
+      { name: "Química Orgánica", dependsOn: ["Química General"] }
+    ]
+  },
+  "Segundo Año": {
+    "Ciclo III": [
+      { name: "Anatomía Descriptiva y Disección I", dependsOn: ["Biología Molecular de la Célula"] },
+      { name: "Bioquímica", dependsOn: ["Química Orgánica"] },
+      "Inglés I",
+      "Métodos de Investigación e Informática",
+      { name: "Microbiología General", dependsOn: ["Biología Molecular de la Célula"] }
+    ],
+    "Ciclo IV": [
+      { name: "Anatomía Descriptiva y Disección II", dependsOn: ["Anatomía Descriptiva y Disección I"] },
+      { name: "Bacteriología y Micología", dependsOn: ["Microbiología General"] },
+      { name: "Inglés II", dependsOn: ["Inglés I"] },
+      { name: "Parasitología", dependsOn: ["Microbiología General"] },
+      { name: "Pastos y Forrajes", dependsOn: ["Animales y su Ambiente"] }
+    ]
+  },
+  "Tercer Año": {
+    "Ciclo V": [
+      { name: "Anatomía Topográfica", dependsOn: ["Anatomía Descriptiva y Disección II"] },
+      { name: "Enfermedades Parasitarias", dependsOn: ["Parasitología"] },
+      { name: "Fisiología General", dependsOn: ["Bioquímica"] },
+      { name: "Histología y Embriología Comparada", dependsOn: ["Anatomía Descriptiva y Disección II"] },
+      { name: "Inglés III", dependsOn: ["Inglés II"] },
+      { name: "Virología", dependsOn: ["Microbiología General"] }
+    ],
+    "Ciclo VI": [
+      { name: "Fisiología Especial", dependsOn: ["Fisiología General"] },
+      { name: "Inglés IV", dependsOn: ["Inglés III"] },
+      { name: "Inmunología", dependsOn: ["Virología"] },
+      { name: "Higiene y Profilaxis Animal", dependsOn: ["Bacteriología y Micología", "Virología"] },
+      { name: "Propedéutica Técnica", dependsOn: ["Fisiología General"] },
+      { name: "Zootecnia de Pequeñas Especies", dependsOn: ["Zootecnia General", "Anatomía Topográfica"] }
+    ]
+  },
+  "Cuarto Año": {
+    "Ciclo VII": [
+      { name: "Alimentos y Nutrición", dependsOn: ["Fisiología Especial"] },
+      { name: "Farmacología General", dependsOn: ["Fisiología Especial", "Propedéutica Técnica"] },
+      { name: "Imagenología", dependsOn: ["Anatomía Topográfica"] },
+      { name: "Producción de Pequeños Rumiantes", dependsOn: ["Higiene y Profilaxis Animal"] },
+      { name: "Economía y Administración de Empresas Agropecuarias", dependsOn: ["Higiene y Profilaxis Animal"] },
+      { name: "Patología General", dependsOn: ["Fisiología Especial"] }
+    ],
+    "Ciclo VIII": [
+      { name: "Técnicas Quirúrgicas", dependsOn: ["Imagenología", "Farmacología General"] },
+      { name: "Laboratorio Clínico", dependsOn: ["Enfermedades Parasitarias", "Fisiología Especial"] },
+      { name: "Farmacología Especial", dependsOn: ["Farmacología General"] },
+      { name: "Patología Sistémica I", dependsOn: ["Patología General"] },
+      { name: "Seminario de Investigación", dependsOn: ["Métodos de Investigación e Informática"] }
+    ]
+  },
+  "Quinto Año": {
+    "Ciclo IX": [
+      { name: "Cirugía General", dependsOn: ["Técnicas Quirúrgicas"] },
+      { name: "Epidemiología", dependsOn: ["Bioestadística", "Higiene y Profilaxis Animal"] },
+      { name: "Medicina y Manejo de Fauna Silvestre", dependsOn: ["Animales y su Ambiente", "Farmacología Especial"] },
+      { name: "Patología Sistémica II", dependsOn: ["Patología Sistémica I"] },
+      { name: "Producción Acuícola y Cunícola", dependsOn: ["Economía y Administración de Empresas Agropecuarias"] }
+    ],
+    "Ciclo X": [
+      { name: "Salud Pública Veterinaria", dependsOn: ["Epidemiología"] },
+      { name: "Inspección de Productos de Origen Animal", dependsOn: ["Higiene y Profilaxis Animal", "Patología Sistémica II"] },
+      { name: "Clínica y Producción de Bovinos", dependsOn: ["Farmacología Especial", "Patología Sistémica II"] },
+      { name: "Clínica de Equinos", dependsOn: ["Farmacología Especial", "Patología Sistémica II"] },
+      { name: "Enfermedades Infecciosas", dependsOn: ["Patología Sistémica II"] }
+    ]
+  },
+  "Sexto Año": {
+    "Ciclo XI": [
+      { name: "Clínica y Producción de Cerdos", dependsOn: ["Farmacología Especial", "Enfermedades Infecciosas"] },
+      { name: "Clínica de Pequeñas Especies", dependsOn: ["Farmacología Especial", "Enfermedades Infecciosas"] },
+      { name: "Fisiopatología de la Reproducción", dependsOn: ["Clínica y Producción de Bovinos"] },
+      { name: "Legislación y Ética Profesional", dependsOn: ["Salud Pública Veterinaria", "Inspección de Productos de Origen Animal", "Clínica y Producción de Bovinos", "Clínica de Equinos", "Enfermedades Infecciosas"] },
+      { name: "Clínica y Producción de Aves", dependsOn: ["Farmacología Especial", "Enfermedades Infecciosas"] }
+    ]
+  }
+};
 
     const container = document.getElementById("malla");
     let completed = JSON.parse(localStorage.getItem("completedSubjects") || "[]");
