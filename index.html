@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Malla Curricular Veterinaria</title>
+  <title>Licenciatura en Medicina Veterinaria y Zootecnia</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -11,24 +11,29 @@
       padding: 20px;
     }
     h2 {
-      margin-top: 40px;
+      margin-top: 30px;
+      font-size: 18px;
+    }
+    h3 {
+      font-size: 16px;
     }
     .grid {
       display: flex;
-      gap: 20px;
+      gap: 15px;
       flex-wrap: wrap;
     }
     .cycle {
       background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 10px;
       flex: 1;
-      min-width: 250px;
+      min-width: 220px;
+      font-size: 14px;
     }
     .subject {
-      margin: 5px 0;
-      padding: 10px;
+      margin: 4px 0;
+      padding: 8px;
       border-radius: 6px;
       background: #e0e7ef;
       cursor: pointer;
@@ -60,7 +65,7 @@
   </style>
 </head>
 <body>
-  <h1>Malla Curricular - Medicina Veterinaria y Zootecnia</h1>
+  <h1>Licenciatura en Medicina Veterinaria y Zootecnia</h1>
   <div class="grid" id="malla"></div>
 
   <script>
@@ -95,6 +100,24 @@
           { name: "Ingles II", dependsOn: ["Ingles I"] },
           { name: "Parasitologia", dependsOn: ["Microbiologia General"] },
           { name: "Pastos y Forrajes", dependsOn: ["Animales y Su Ambiente"] }
+        ]
+      },
+      "Tercer Año": {
+        "Ciclo V": [
+          { name: "Anatomia Topografica", dependsOn: ["Anatomia Descriptiva y Diseccion II"] },
+          { name: "Enfermedades Parasitarias", dependsOn: ["Parasitologia"] },
+          { name: "Fisiologia General", dependsOn: ["Bioquimica"] },
+          { name: "Histologia y Embriologia Comparada", dependsOn: ["Anatomia Descriptiva y Diseccion II"] },
+          { name: "Ingles III", dependsOn: ["Ingles II"] },
+          { name: "Virologia", dependsOn: ["Microbiologia General"] }
+        ],
+        "Ciclo VI": [
+          { name: "Fisiologia Especial", dependsOn: ["Fisiologia General"] },
+          { name: "Ingles IV", dependsOn: ["Ingles III"] },
+          { name: "Inmunologia", dependsOn: ["Virologia"] },
+          { name: "Higiene y Profilaxis Animal", dependsOn: ["Bacteriologia y Micologia", "Virologia"] },
+          { name: "Propedeutica Tecnica", dependsOn: ["Fisiologia General"] },
+          { name: "Zootecnia de Pequeñas Especies", dependsOn: ["Zootecnia General", "Anatomia Topografica"] }
         ]
       }
     };
@@ -160,4 +183,3 @@
   </script>
 </body>
 </html>
-
