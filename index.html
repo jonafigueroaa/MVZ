@@ -28,7 +28,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       padding: 10px;
       flex: 1;
-      min-width: 220px;
+      min-width: 200px;
       font-size: 14px;
     }
     .subject {
@@ -155,7 +155,11 @@
       },
       "Sexto Año": {
         "Ciclo XI": [
-          "Clinica y Produccion de Cerdos"
+          { name: "Clinica y Produccion de Cerdos", dependsOn: ["Farmacologia Especial","Enfermedades Infecciosas"] },
+          { name: "Clinica de Pequeñas Especies", dependsOn: ["Farmacologia Especial","Enfermedades Infecciosas"] },
+          { name: "Fisiopatologia de la Reproduccion", dependsOn: ["Clinica y Produccion de Bovinos"] },
+          { name: "Legislacion y Etica Profesional", dependsOn: ["Salud Publica Veterinaria","Inspeccion de Productos de Origen Animal","Clinica y Produccion de Bovinos","Clinica de Equinos","Enfermedades Infecciosas"] },
+          { name: "Clinica y Produccion de Aves", dependsOn: ["Farmacologia Especial","Enfermedades Infecciosas"] }
         ]
       }
     };
