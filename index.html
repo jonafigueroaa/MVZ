@@ -10,18 +10,39 @@
       color: #333;
       padding: 20px;
     }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      height: 50px;
+      width: auto;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin: 0;
+    }
+
     h2 {
       margin-top: 30px;
       font-size: 18px;
     }
+
     h3 {
       font-size: 16px;
     }
+
     .grid {
       display: flex;
       gap: 15px;
       flex-wrap: wrap;
     }
+
     .cycle {
       background: #fff;
       border-radius: 8px;
@@ -31,6 +52,7 @@
       min-width: 200px;
       font-size: 14px;
     }
+
     .subject {
       margin: 4px 0;
       padding: 8px;
@@ -39,34 +61,42 @@
       cursor: pointer;
       position: relative;
       transition: background 0.3s;
+      overflow: visible;
+      z-index: 1;
     }
+
     .subject.completed {
       background: #a5d6a7;
       text-decoration: line-through;
     }
+
     .subject.locked {
       background: #ddd;
       cursor: not-allowed;
     }
+
     .subject:hover::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  top: -30px; /* cambia la posición vertical */
-  left: 50%;
-  transform: translateX(-50%);
-  background: #333;
-  color: #fff;
-  padding: 6px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
-  font-size: 12px;
-  z-index: 10;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
+      content: attr(data-tooltip);
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: #fff;
+      padding: 6px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      font-size: 12px;
+      z-index: 10;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
   </style>
 </head>
 <body>
-  <h1>Licenciatura en Medicina Veterinaria y Zootecnia | Plan 2023 - 2028</h1>
+  <div class="header">
+    <img src="logo.png" alt="Logo MVZ" class="logo">
+    <h1>Licenciatura en Medicina Veterinaria y Zootecnia | Plan 2023 - 2028</h1>
+  </div>
   <div class="grid" id="malla"></div>
 
   <script>
