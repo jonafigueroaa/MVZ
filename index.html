@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Licenciatura en Medicina Veterinaria y Zootecnia</title>
+  <title>Pensum MVZ 2023</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -83,7 +83,7 @@
           { name: "Bioestadistica", dependsOn: ["Matematica"] },
           { name: "Biofisica", dependsOn: ["Matematica"] },
           { name: "Biologia Molecular de la Celula", dependsOn: ["Quimica General"] },
-          { name: "Quimica Organica", dependsOn: ["Quimica General"] },
+          { name: "Quimica Organica", dependsOn: ["Quimica General"] }
         ]
       },
       "Segundo Año": {
@@ -118,6 +118,39 @@
           { name: "Higiene y Profilaxis Animal", dependsOn: ["Bacteriologia y Micologia", "Virologia"] },
           { name: "Propedeutica Tecnica", dependsOn: ["Fisiologia General"] },
           { name: "Zootecnia de Pequeñas Especies", dependsOn: ["Zootecnia General", "Anatomia Topografica"] }
+        ]
+      },
+      "Cuarto Año": {
+        "Ciclo VII": [
+          { name: "Alimentos y Nutricion", dependsOn: ["Fisiologia Especial"] },
+          { name: "Farmacologia General", dependsOn: ["Fisiologia Especial", "Propedeutica Tecnica"] },
+          { name: "Imagenologia", dependsOn: ["Anatomia Topografica"] },
+          { name: "Produccion de pequeños rumiantes", dependsOn: ["Higiene y Profilaxis Animal"] },
+          { name: "ECONOMÍA Y  ADMINISTRACIÓN DE EMPRESAS AGROPECUARIAS", dependsOn: ["Higiene y Profilaxis Animal"] },
+          { name: "Patologia General", dependsOn: ["Fisiologia Especial"] }
+        ],
+        "Ciclo VIII": [
+          { name: "Tecnicas Quirurgicas", dependsOn: ["Imagenologia", "Farmacologia General"] },
+          { name: "Laboratorio Clinico", dependsOn: ["Enfermedades Parasitarias", "Fisiologia Especial"] },
+          { name: "Farmacologia Especial", dependsOn: ["Farmacologia General"] },
+          { name: "Patologia Sistemica I", dependsOn: ["Patologia General"] },
+          { name: "Seminario de Investigacion", dependsOn: ["Metodos de Investigacion e Informatica"] }
+        ]
+      },
+      "Quinto Año": {
+        "Ciclo IX": [
+          { name: "Cirugia General", dependsOn: ["Tecnicas Quirurgicas"] },
+          { name: "Epidemiologia", dependsOn: ["Bioestadistica", "Higiene y Profilaxis Animal"] },
+          { name: "Medicina y Manejo de Fauna Silvestre", dependsOn: ["Animales y Su Ambiente", "Farmacologia Especial"] },
+          { name: "Patologia Sistemica II", dependsOn: ["Patologia Sistemica I"] },
+          { name: "Produccion Acuicola y Cunicula", dependsOn: ["ECONOMÍA Y  ADMINISTRACIÓN DE EMPRESAS AGROPECUARIAS"] }
+        ],
+        "Ciclo X": [
+          { name: "Salud Publica Veterinaria", dependsOn: ["Epidemiologia"] },
+          { name: "Inspeccion de Productos de Origen Animal", dependsOn: ["Higiene y Profilaxis Animal", "Patologia Sistemica II"] },
+          { name: "Clinica y Produccion de Bovinos", dependsOn: ["Farmacologia Especial", "Patologia Sistemica II"] },
+          { name: "Clinica de Equinos", dependsOn: ["Farmacologia Especial", "Patologia Sistemica II"] },
+          { name: "Enfermedades Infecciosas", dependsOn: ["Patologia Sistemica II"] }
         ]
       }
     };
