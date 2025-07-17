@@ -1,205 +1,229 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Malla Curricular - Medicina Veterinaria</title>
+  <meta charset="UTF-8">
+  <title>Licenciatura en Medicina Veterinaria y Zootecnia</title>
+  <title>Pensum MVZ 2023</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f6f8;
-      margin: 0;
-      padding: 1rem;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7f9;
       color: #333;
+      padding: 20px;
     }
-    h1 {
-      text-align: center;
-      margin-bottom: 0.5rem;
+    h2 {
+      margin-top: 30px;
+      font-size: 18px;
     }
-    .legend {
+    h3 {
+      font-size: 16px;
+    }
+    .grid {
       display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .legend-color {
-      width: 16px;
-      height: 16px;
-      border-radius: 4px;
-    }
-    .container {
-      display: flex;
+      gap: 15px;
       flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-    .year {
-      background: #ffffff;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 1rem;
-      width: 300px;
-      min-width: 280px;
     }
     .cycle {
-      margin-top: 1rem;
-    }
-    .cycle h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.1rem;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 0.2rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 10px;
+      flex: 1;
+      min-width: 220px;
+      font-size: 14px;
     }
     .subject {
-      background-color: #e0e0e0;
+      margin: 4px 0;
+      padding: 8px;
       border-radius: 6px;
-      padding: 0.4rem 0.6rem;
-      margin: 0.3rem 0;
+      background: #e0e7ef;
       cursor: pointer;
-      font-size: 0.95rem;
       position: relative;
+      transition: background 0.3s;
     }
     .subject.completed {
-      background-color: #c8e6c9;
+      background: #a5d6a7;
+      text-decoration: line-through;
     }
     .subject.locked {
-      background-color: #f8d7da;
+      background: #ddd;
       cursor: not-allowed;
     }
     .subject:hover::after {
       content: attr(data-tooltip);
       position: absolute;
-      left: 100%;
+      left: 105%;
       top: 50%;
       transform: translateY(-50%);
-      margin-left: 10px;
       background: #333;
       color: #fff;
-      padding: 4px 8px;
+      padding: 6px;
       border-radius: 4px;
       white-space: nowrap;
-      font-size: 0.8rem;
-      z-index: 10;
+      font-size: 12px;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <h1>Malla Curricular - Medicina Veterinaria y Zootecnia</h1>
-  <div class="legend">
-    <div class="legend-item">
-      <div class="legend-color" style="background:#c8e6c9"></div>
-      <span>Aprobada</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color" style="background:#e0e0e0"></div>
-      <span>Disponible</span>
-    </div>
-    <div class="legend-item">
-      <div class="legend-color" style="background:#f8d7da"></div>
-      <span>Bloqueada</span>
-    </div>
-  </div>
-  <div class="container" id="curriculum"></div>
+  <h1>Licenciatura en Medicina Veterinaria y Zootecnia</h1>
+  <div class="grid" id="malla"></div>
+
   <script>
     const data = {
       "Primer Año": {
         "Ciclo I": [
-          "Filosofía General",
-          "Matemática",
-          "Química General",
-          "Sociología General",
+          "Matematica",
+          "Filosofia General",
+          "Sociologia General",
+          "Quimica General",
           "Zootecnia General"
         ],
         "Ciclo II": [
-          { name: "Animales Y Su Ambiente" },
-          { name: "Bioestadística", requires: ["Matemática"] },
-          { name: "Biofísica", requires: ["Matemática"] },
-          { name: "Biología Molecular De La Célula", requires: ["Química General"] },
-          { name: "Química Orgánica", requires: ["Química General"] }
+          { name: "Animales y Su Ambiente" },
+          { name: "Bioestadistica", dependsOn: ["Matematica"] },
+          { name: "Biofisica", dependsOn: ["Matematica"] },
+          { name: "Biologia Molecular de la Celula", dependsOn: ["Quimica General"] },
+          { name: "Quimica Organica", dependsOn: ["Quimica General"] },
+          { name: "Quimica Organica", dependsOn: ["Quimica General"] }
         ]
       },
       "Segundo Año": {
         "Ciclo III": [
-          { name: "Anatomía Descriptiva Y Disección I", requires: ["Biología Molecular De La Célula"] },
-          "Inglés I",
-          "Métodos De Investigación E Informática",
-          { name: "Bioquímica", requires: ["Química Orgánica"] },
-          { name: "Microbiología General", requires: ["Biología Molecular De La Célula"] }
+          { name: "Anatomia Descriptiva y Diseccion I", dependsOn: ["Biologia Molecular de la Celula"] },
+          { name: "Bioquimica", dependsOn: ["Quimica Organica"] },
+          "Ingles I",
+          "Metodos de Investigacion e Informatica",
+          { name: "Microbiologia General", dependsOn: ["Biologia Molecular de la Celula"] }
         ],
         "Ciclo IV": [
-          { name: "Anatomía Descriptiva Y Disección II", requires: ["Anatomía Descriptiva Y Disección I"] },
-          { name: "Bacteriología Y Micología", requires: ["Microbiología General"] },
-          { name: "Inglés II", requires: ["Inglés I"] },
-          { name: "Parasitología", requires: ["Microbiología General"] },
-          { name: "Pastos Y Forrajes", requires: ["Animales Y Su Ambiente"] }
+          { name: "Anatomia Descriptiva y Diseccion II", dependsOn: ["Anatomia Descriptiva y Diseccion I"] },
+          { name: "Bacteriologia y Micologia", dependsOn: ["Microbiologia General"] },
+          { name: "Ingles II", dependsOn: ["Ingles I"] },
+          { name: "Parasitologia", dependsOn: ["Microbiologia General"] },
+          { name: "Pastos y Forrajes", dependsOn: ["Animales y Su Ambiente"] }
         ]
       },
       "Tercer Año": {
         "Ciclo V": [
-          { name: "Anatomía Topográfica", requires: ["Anatomía Descriptiva Y Disección II"] },
-          { name: "Enfermedades Parasitarias", requires: ["Parasitología"] },
-          { name: "Fisiología General", requires: ["Bioquímica"] },
-          { name: "Histología Y Embriología Comparada", requires: ["Anatomía Descriptiva Y Disección II"] },
-          { name: "Inglés III", requires: ["Inglés II"] },
-          { name: "Virología", requires: ["Microbiología General"] }
+          { name: "Anatomia Topografica", dependsOn: ["Anatomia Descriptiva y Diseccion II"] },
+          { name: "Enfermedades Parasitarias", dependsOn: ["Parasitologia"] },
+          { name: "Fisiologia General", dependsOn: ["Bioquimica"] },
+          { name: "Histologia y Embriologia Comparada", dependsOn: ["Anatomia Descriptiva y Diseccion II"] },
+          { name: "Ingles III", dependsOn: ["Ingles II"] },
+          { name: "Virologia", dependsOn: ["Microbiologia General"] }
         ],
         "Ciclo VI": [
-          { name: "Fisiología Especial", requires: ["Fisiología General"] },
-          { name: "Inglés IV", requires: ["Inglés III"] },
-          { name: "Inmunología", requires: ["Virología"] },
-          { name: "Higiene Y Profilaxis Animal", requires: ["Bacteriología Y Micología", "Virología"] },
-          { name: "Propedéutica Técnica", requires: ["Fisiología General"] },
-          { name: "Zootecnia De Pequeñas Especies", requires: ["Zootecnia General", "Anatomía Topográfica"] }
+          { name: "Fisiologia Especial", dependsOn: ["Fisiologia General"] },
+          { name: "Ingles IV", dependsOn: ["Ingles III"] },
+          { name: "Inmunologia", dependsOn: ["Virologia"] },
+          { name: "Higiene y Profilaxis Animal", dependsOn: ["Bacteriologia y Micologia", "Virologia"] },
+          { name: "Propedeutica Tecnica", dependsOn: ["Fisiologia General"] },
+          { name: "Zootecnia de Pequeñas Especies", dependsOn: ["Zootecnia General", "Anatomia Topografica"] }
         ]
       },
       "Cuarto Año": {
         "Ciclo VII": [
-          { name: "Alimentos Y Nutrición", requires: ["Fisiología Especial"] },
-          { name: "Economía Y Administración De Empresas Agropecuarias", requires: ["Higiene Y Profilaxis Animal"] },
-          { name: "Farmacología General", requires: ["Fisiología Especial", "Propedéutica Técnica"] },
-          { name: "Imagenología", requires: ["Anatomía Topográfica"] },
-          { name: "Patología General", requires: ["Fisiología Especial"] },
-          { name: "Producción De Pequeños Rumiantes", requires: ["Higiene Y Profilaxis Animal"] }
+          { name: "Alimentos y Nutricion", dependsOn: ["Fisiologia Especial"] },
+          { name: "Farmacologia General", dependsOn: ["Fisiologia Especial", "Propedeutica Tecnica"] },
+          { name: "Imagenologia", dependsOn: ["Anatomia Topografica"] },
+          { name: "Produccion de pequeños rumiantes", dependsOn: ["Higiene y Profilaxis Animal"] },
+          { name: "ECONOMÍA Y  ADMINISTRACIÓN DE EMPRESAS AGROPECUARIAS", dependsOn: ["Higiene y Profilaxis Animal"] },
+          { name: "Patologia General", dependsOn: ["Fisiologia Especial"] }
         ],
         "Ciclo VIII": [
-          { name: "Farmacología Especial", requires: ["Farmacología General"] },
-          { name: "Laboratorio Clínico", requires: ["Enfermedades Parasitarias", "Fisiología Especial"] },
-          { name: "Patología Sistémica I", requires: ["Patología General"] },
-          { name: "Seminario De Investigación", requires: ["Métodos De Investigación E Informática"] },
-          { name: "Técnicas Quirúrgicas", requires: ["Imagenología", "Farmacología General"] }
+          { name: "Tecnicas Quirurgicas", dependsOn: ["Imagenologia", "Farmacologia General"] },
+          { name: "Laboratorio Clinico", dependsOn: ["Enfermedades Parasitarias", "Fisiologia Especial"] },
+          { name: "Farmacologia Especial", dependsOn: ["Farmacologia General"] },
+          { name: "Patologia Sistemica I", dependsOn: ["Patologia General"] },
+          { name: "Seminario de Investigacion", dependsOn: ["Metodos de Investigacion e Informatica"] }
         ]
       },
       "Quinto Año": {
         "Ciclo IX": [
-          { name: "Cirugía General", requires: ["Técnicas Quirúrgicas"] },
-          { name: "Epidemiología", requires: ["Bioestadística", "Higiene Y Profilaxis Animal"] },
-          { name: "Medicina Y Manejo De Fauna Silvestre", requires: ["Animales Y Su Ambiente", "Farmacología Especial"] },
-          { name: "Patología Sistémica II", requires: ["Patología Sistémica I"] },
-          { name: "Producción Acuícola Y Cunícola", requires: ["Economía Y Administración De Empresas Agropecuarias"] }
+          { name: "Cirugia General", dependsOn: ["Tecnicas Quirurgicas"] },
+          { name: "Epidemiologia", dependsOn: ["Bioestadistica", "Higiene y Profilaxis Animal"] },
+          { name: "Medicina y Manejo de Fauna Silvestre", dependsOn: ["Animales y Su Ambiente", "Farmacologia Especial"] },
+          { name: "Patologia Sistemica II", dependsOn: ["Patologia Sistemica I"] },
+          { name: "Produccion Acuicola y Cunicula", dependsOn: ["ECONOMÍA Y  ADMINISTRACIÓN DE EMPRESAS AGROPECUARIAS"] }
         ],
         "Ciclo X": [
-          { name: "Clínica De Equinos", requires: ["Farmacología Especial", "Patología Sistémica II"] },
-          { name: "Clínica Y Producción De Bovinos", requires: ["Farmacología Especial", "Patología Sistémica II"] },
-          { name: "Enfermedades Infecciosas", requires: ["Patología Sistémica II"] },
-          { name: "Inspección De Productos De Origen Animal", requires: ["Higiene Y Profilaxis Animal", "Patología Sistémica II"] },
-          { name: "Salud Pública Veterinaria", requires: ["Epidemiología"] }
+          { name: "Salud Publica Veterinaria", dependsOn: ["Epidemiologia"] },
+          { name: "Inspeccion de Productos de Origen Animal", dependsOn: ["Higiene y Profilaxis Animal", "Patologia Sistemica II"] },
+          { name: "Clinica y Produccion de Bovinos", dependsOn: ["Farmacologia Especial", "Patologia Sistemica II"] },
+          { name: "Clinica de Equinos", dependsOn: ["Farmacologia Especial", "Patologia Sistemica II"] },
+          { name: "Enfermedades Infecciosas", dependsOn: ["Patologia Sistemica II"] }
         ]
       },
       "Sexto Año": {
         "Ciclo XI": [
-          { name: "Clínica De Pequeñas Especies", requires: ["Farmacología Especial", "Enfermedades Infecciosas"] },
-          { name: "Clínica Y Producción De Aves", requires: ["Farmacología Especial", "Enfermedades Infecciosas"] },
-          { name: "Clínica Y Producción De Cerdos", requires: ["Farmacología Especial", "Enfermedades Infecciosas"] },
-          { name: "Fisiopatología De La Reproducción", requires: ["Clínica Y Producción De Bovinos"] },
-          { name: "Legislación Y Ética Profesional", requiresAllOf: ["Clínica De Equinos", "Clínica Y Producción De Bovinos", "Enfermedades Infecciosas", "Inspección De Productos De Origen Animal", "Salud Pública Veterinaria"] }
+          { name: "Clinica y Produccion de Cerdos", depends: ["Farmacologia Especial", "Enfermedades Infecciosas"] },
+          { name: "Clinica de Pequeñas Especies", depends: ["Farmacologia Especial", "Enfermedades Infecciosas"] },
+          { name: "Fisiopatologia de la Reproduccion", depends: ["Clinica y Produccion de Bovinos"] },
+          { name: "Legislacion y Etica Profesional", depends: ["Salud Publica Veterinaria", "Inspeccion de Productos de Origen Animal", "Clinica y Produccion de Bovinos", "Clinica de Equinos", "Enfermedades Infecciosas"] },
+          { name: "Clinica y Produccion de Aves", depends: ["Farmacologia Especial", "Enfermedades Infecciosas"] }
         ]
       }
     };
+
+    const container = document.getElementById("malla");
+    let completed = JSON.parse(localStorage.getItem("completedSubjects") || "[]");
+
+    function isCompleted(name) {
+      return completed.includes(name);
+    }
+
+    function render() {
+      container.innerHTML = "";
+      for (const year in data) {
+        const yearDiv = document.createElement("div");
+        yearDiv.className = "cycle";
+        const h2 = document.createElement("h2");
+        h2.textContent = year;
+        yearDiv.appendChild(h2);
+
+        for (const cycle in data[year]) {
+          const cycleDiv = document.createElement("div");
+          const h3 = document.createElement("h3");
+          h3.textContent = cycle;
+          cycleDiv.appendChild(h3);
+
+          data[year][cycle].forEach(subject => {
+            const name = typeof subject === 'string' ? subject : subject.name;
+            const depends = subject.dependsOn || [];
+            const div = document.createElement("div");
+            div.className = "subject";
+            div.textContent = name;
+
+            if (isCompleted(name)) {
+              div.classList.add("completed");
+            } else if (depends.length && !depends.every(isCompleted)) {
+              div.classList.add("locked");
+              div.setAttribute("data-tooltip", "Requiere: " + depends.filter(d => !isCompleted(d)).join(", "));
+            }
+
+            div.addEventListener("click", () => {
+              if (div.classList.contains("locked")) return;
+              if (div.classList.contains("completed")) {
+                completed = completed.filter(s => s !== name);
+              } else {
+                completed.push(name);
+              }
+              localStorage.setItem("completedSubjects", JSON.stringify(completed));
+              render();
+            });
+
+            cycleDiv.appendChild(div);
+          });
+
+          yearDiv.appendChild(cycleDiv);
+        }
+
+        container.appendChild(yearDiv);
+      }
+    }
+
+    render();
   </script>
 </body>
 </html>
