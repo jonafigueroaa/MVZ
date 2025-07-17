@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Licenciatura en Medicina Veterinaria y Zootecnia</title>
   <title>Pensum MVZ 2023</title>
   <style>
     body {
@@ -19,17 +18,15 @@
       font-size: 16px;
     }
     .grid {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 15px;
-      flex-wrap: wrap;
     }
     .cycle {
       background: #fff;
       border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       padding: 10px;
-      flex: 1;
-      min-width: 220px;
       font-size: 14px;
     }
     .subject {
@@ -84,7 +81,6 @@
           { name: "Bioestadistica", dependsOn: ["Matematica"] },
           { name: "Biofisica", dependsOn: ["Matematica"] },
           { name: "Biologia Molecular de la Celula", dependsOn: ["Quimica General"] },
-          { name: "Quimica Organica", dependsOn: ["Quimica General"] },
           { name: "Quimica Organica", dependsOn: ["Quimica General"] }
         ]
       },
@@ -157,11 +153,11 @@
       },
       "Sexto Año": {
         "Ciclo XI": [
-          { name: "Clinica y Produccion de Cerdos", depends: ["Farmacologia Especial", "Enfermedades Infecciosas"] },
-          { name: "Clinica de Pequeñas Especies", depends: ["Farmacologia Especial", "Enfermedades Infecciosas"] },
-          { name: "Fisiopatologia de la Reproduccion", depends: ["Clinica y Produccion de Bovinos"] },
-          { name: "Legislacion y Etica Profesional", depends: ["Salud Publica Veterinaria", "Inspeccion de Productos de Origen Animal", "Clinica y Produccion de Bovinos", "Clinica de Equinos", "Enfermedades Infecciosas"] },
-          { name: "Clinica y Produccion de Aves", depends: ["Farmacologia Especial", "Enfermedades Infecciosas"] }
+          { name: "Clinica y Produccion de Cerdos", dependsOn: ["Farmacologia Especial", "Enfermedades Infecciosas"] },
+          { name: "Clinica de Pequeñas Especies", dependsOn: ["Farmacologia Especial", "Enfermedades Infecciosas"] },
+          { name: "Fisiopatologia de la Reproduccion", dependsOn: ["Clinica y Produccion de Bovinos"] },
+          { name: "Legislacion y Etica Profesional", dependsOn: ["Salud Publica Veterinaria", "Inspeccion de Productos de Origen Animal", "Clinica y Produccion de Bovinos", "Clinica de Equinos", "Enfermedades Infecciosas"] },
+          { name: "Clinica y Produccion de Aves", dependsOn: ["Farmacologia Especial", "Enfermedades Infecciosas"] }
         ]
       }
     };
