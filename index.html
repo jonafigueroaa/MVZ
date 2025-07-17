@@ -14,18 +14,19 @@
     .header {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 15px;
-      margin-bottom: 20px;
-    }
+      margin-bottom: 30px;
 
     .logo {
-      height: 50px;
-      width: auto;
+      height: 60px;
     }
 
     h1 {
-      font-size: 22px;
-      margin: 0;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #3D3BFF;
+      font-size: 2rem;
     }
 
     h2 {
@@ -44,35 +45,41 @@
     }
 
     .cycle {
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      padding: 10px;
-      flex: 1;
-      min-width: 200px;
-      font-size: 14px;
+      flex: 0 0 260px;
+      background-color: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      border: 2px solid #d1d1ff;
     }
 
     .subject {
-      margin: 4px 0;
-      padding: 8px;
-      border-radius: 6px;
-      background: #e0e7ef;
+       background-color: #e6e6ff;
+      border-left: 6px solid #3D3BFF;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
       cursor: pointer;
+      font-weight: 500;
+      color: #1a1a66;
+      transition: all 0.2s ease-in-out;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
       position: relative;
-      transition: background 0.3s;
-      overflow: visible;
-      z-index: 1;
     }
 
     .subject.completed {
-      background: #a5d6a7;
+ background-color: #b2f2bb;
+      border-left-color: #5cb85c;
+      color: #005500;
       text-decoration: line-through;
     }
 
     .subject.locked {
-      background: #ddd;
+      background-color: #f0f0f0;
+      color: #aaa;
+      border-left-color: #ccc;
       cursor: not-allowed;
+      text-decoration: none;
     }
 
     .subject:hover::after {
