@@ -1,1 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Malla Curricular Veterinaria</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7f9;
+      color: #333;
+      padding: 20px;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .cycle {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 15px;
+      flex: 1;
+      min-width: 250px;
+    }
+    .subject {
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 6px;
+      background: #e0e7ef;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.3s;
+    }
+    .subject.completed {
+      background: #a5d6a7;
+      text-decoration: line-through;
+    }
+    .subject.locked {
+      background: #ddd;
+      cursor: not-allowed;
+    }
+    .subject:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 105%;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #333;
+      color: #fff;
+      padding: 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+      font-size: 12px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Malla Curricular - Medicina Veterinaria y Zootecnia</h1>
+  <div class="grid" id="malla"></div>
+
+  <script>
+    const data = {
+      "Primer Año": {
+        "Ciclo I": [
+          "Matematica",
+          "Filosofia General",
+          "Sociologia General",
+          "Quimica General",
+          "Zootecnia General"
+        ],
+        "Ciclo II": [
+          { name: "Animales y Su Ambiente" },
+          { name: "Bioestadistica", dependsOn: ["Matematica"] },
+          { name: "Biofisica", dependsOn: ["Matematica"] },
+          { name: "Biologia Molecular de la Celula", dependsOn: ["Quimica General"] },
+          { name: "Quimica Organica", dependsOn: ["Quimica General"] },
+        ]
+      },
+      "Segundo Año": {
+        "Ciclo III": [
+          { name: "Anatomia Descriptiva y Diseccion I", dependsOn: ["Biologia Molecular de la Celula"] },
+          { name: "Bioquimica", dependsOn: ["Quimica Organica"] },
+          "Ingles I",
+          "Metodos de Investigacion e Informatica",
+          { name: "Microbiologia General", dependsOn: ["Biologia Molecular de la Celula"] }
+        ],
+        "Ciclo IV": [
+          { name: "Anatomia Descriptiva y Diseccion II", dependsOn: ["Anatomia Descriptiva y Diseccion I"] },
+          { name: "Bacteriologia y Micologia", dependsOn: ["Microbiologia General"] },
+          { name: "Ingles II", dependsOn: ["Ingles I"] },
+          { name: "Parasitologia", dependsOn: ["Microbiologia General"] },
+          { name: "Pastos y Forrajes", dependsOn: ["Animales y Su Ambiente"] }
+        ]
+      }
+    };
+
+    const container = document.getElementById("malla");
+    let completed = JSON.parse(localStorage.getItem("completedSubjects") || "[]");
+
+    function isCompleted(name) {
+      return completed.includes(name);
+    }
+
+    function render() {
+      container.innerHTML = "";
+      for (const year in data) {
+        const yearDiv = document.createElement("div");
+        yearDiv.className = "cycle";
+        const h2 = document.createElement("h2");
+        h2.textContent = year;
+        yearDiv.appendChild(h2);
+
+        for (const cycle in data[year]) {
+          const cycleDiv = document.createElement("div");
+          const h3 = document.createElement("h3");
+          h3.textContent = cycle;
+          cycleDiv.appendChild(h3);
+
+          data[year][cycle].forEach(subject => {
+            const name = typeof subject === 'string' ? subject : subject.name;
+            const depends = subject.dependsOn || [];
+            const div = document.createElement("div");
+            div.className = "subject";
+            div.textContent = name;
+
+            if (isCompleted(name)) {
+              div.classList.add("completed");
+            } else if (depends.length && !depends.every(isCompleted)) {
+              div.classList.add("locked");
+              div.setAttribute("data-tooltip", "Requiere: " + depends.filter(d => !isCompleted(d)).join(", "));
+            }
+
+            div.addEventListener("click", () => {
+              if (div.classList.contains("locked")) return;
+              if (div.classList.contains("completed")) {
+                completed = completed.filter(s => s !== name);
+              } else {
+                completed.push(name);
+              }
+              localStorage.setItem("completedSubjects", JSON.stringify(completed));
+              render();
+            });
+
+            cycleDiv.appendChild(div);
+          });
+
+          yearDiv.appendChild(cycleDiv);
+        }
+
+        container.appendChild(yearDiv);
+      }
+    }
+
+    render();
+  </script>
+</body>
+</html>
 
